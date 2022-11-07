@@ -1,5 +1,6 @@
 import s from './Searchbar.module.css';
 import { Component } from 'react';
+import { toast } from 'react-toastify';
 
 
 class Searchbar extends Component {
@@ -15,7 +16,7 @@ class Searchbar extends Component {
   handleSubmit = e => {
     e.preventDefault();
     if (this.state.request.trim() === '') {
-      alert('Plese, type something')
+      toast.error('You need to type something.')
       return
     }
     this.props.onSubmit(this.state.request.toLowerCase());
