@@ -10,7 +10,7 @@ class Button extends Component {
     this.setState(({ clicks }) => {
       return {clicks: clicks + 1}
     })
-    this.props.onClick(this.state.clicks)
+    this.props.onClick(this.state.clicks + 1)
   }
 
   render() {
