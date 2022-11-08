@@ -1,8 +1,8 @@
-import { Component } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
 import './App.css';
+import { Component } from 'react';
 import Searchbar from './components/Searchbar';
 import ImageGallery from './components/ImageGallery';
 import Button from './components/Button';
@@ -29,8 +29,10 @@ class App extends Component {
     }
   }
 
-  onButtonClick = (clicks) => {
-    this.setState({ pages: clicks })
+  clickCounter = () => {
+    this.setState(prevState => ({
+      pages: prevState.pages + 1
+    }))
   }
 
   onFormSubmit = (request) => {
@@ -44,10 +46,10 @@ class App extends Component {
   }
 
   render() {
-    const { images, pages, largeImageUrl } = this.state;
+    const { images, pages, largeImageUrl, isModalOpen } = this.state;
     return (
       <div className="App">
-        {this.state.isModalOpen &&
+        {isModalOpen &&
           <Modal
             onCloseButton={this.toggleModal}
             largeImageUrl={largeImageUrl}
@@ -60,7 +62,7 @@ class App extends Component {
           images={images}
           pages={pages}
         />
-        {images && <Button onClick={this.onButtonClick} />}
+        {images && <Button clickCounter={this.clickCounter} />}
         <ToastContainer autoClose={3000} />
       </div>
     );

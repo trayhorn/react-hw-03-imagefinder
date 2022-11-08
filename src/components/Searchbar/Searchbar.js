@@ -1,46 +1,43 @@
-import s from './Searchbar.module.css';
-import { Component } from 'react';
+import { Formik, Form, Field } from 'formik';
 import { toast } from 'react-toastify';
+import { Component } from 'react';
+import s from './Searchbar.module.css';
 
 
 class Searchbar extends Component {
-  state = {
-    request: ''
-  }
 
-
-  handleChange = e => {
-    this.setState({request: e.target.value})
-  }
-
-  handleSubmit = e => {
-    e.preventDefault();
-    if (this.state.request.trim() === '') {
+  handleSubmit = ({request}, { resetForm }) => {
+    if (request.trim() === '') {
       toast.error('You need to type something.')
       return
     }
-    this.props.onSubmit(this.state.request.toLowerCase());
-    this.setState({request: ''})
+
+    this.props.onSubmit(request);
+    resetForm();
   }
 
   render() {
     return (
       <header className={s.Searchbar}>
-        <form className={s.SearchForm} onSubmit={this.handleSubmit}>
-          <button type="submit" className={s.formButton}>
-            <span className={s.formButtonLabel}>Search</span>
-          </button>
+        <Formik
+          initialValues={{ request: '' }}
+          onSubmit={this.handleSubmit}
+        >
+          <Form className={s.SearchForm}>
+            <button type="submit" className={s.formButton}>
+              <span className={s.formButtonLabel}>Search</span>
+            </button>
 
-          <input
-            className={s.formInput}
-            type="text"
-            autoComplete='off'
-            autoFocus
-            placeholder="Search images and photos"
-            value={this.state.request}
-            onChange={this.handleChange}
-          />
-        </form>
+            <Field
+              className={s.formInput}
+              name="request"
+              type="text"
+              autoComplete='off'
+              autoFocus
+              placeholder="Search images and photos"
+            />
+          </Form>
+        </Formik>
       </header>
     )
   }
