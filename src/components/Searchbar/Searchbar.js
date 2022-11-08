@@ -21,7 +21,6 @@ class Searchbar extends Component {
     }
     this.props.onSubmit(this.state.request.toLowerCase());
     this.setState({request: ''})
-
   }
 
   render() {

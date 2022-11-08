@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Loading } from 'notiflix/build/notiflix-loading-aio';
 import './App.css';
 import Searchbar from './components/Searchbar';
 import ImageGallery from './components/ImageGallery';
@@ -12,7 +13,20 @@ class App extends Component {
   state = {
     images: null,
     pages: 1,
-    isModalOpen: false
+    isModalOpen: false,
+    largeImageUrl: ''
+  }
+
+  getLargeImageUrl = url => {
+    this.setState({ largeImageUrl: url });
+  }
+
+  openModalOnClick = (event) => {
+    if (event.target.localName === 'img') {
+      Loading.circle()
+      this.toggleModal();
+      Loading.remove()
+    }
   }
 
   onButtonClick = (clicks) => {
@@ -30,13 +44,18 @@ class App extends Component {
   }
 
   render() {
-    const { images, pages } = this.state;
+    const { images, pages, largeImageUrl } = this.state;
     return (
       <div className="App">
         {this.state.isModalOpen &&
-          <Modal />}
+          <Modal
+            onCloseButton={this.toggleModal}
+            largeImageUrl={largeImageUrl}
+          />}
         <Searchbar onSubmit={this.onFormSubmit} />
         <ImageGallery
+          getLargeImageUrl={this.getLargeImageUrl}
+          onClick={this.openModalOnClick}
           onCloseButton={this.toggleModal}
           images={images}
           pages={pages}

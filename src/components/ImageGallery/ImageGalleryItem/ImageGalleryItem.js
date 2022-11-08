@@ -1,11 +1,22 @@
 import s from './ImageGalleryItem.module.css';
+import { Component } from 'react';
 
-export default function ImageGalleryItem({ id, webformatURL }) {
-  return (
-    <li className={s.item}>
-      <img className={s.itemImage}
-        src={webformatURL}
-        alt={id} />
-    </li>
-  )
+class ImageGalleryItem extends Component {
+  handleImageClick = () => {
+    const { getLargeImageUrl, largeImageURL } = this.props;
+    getLargeImageUrl(largeImageURL);
+  }
+
+  render() {
+    const { id, webformatURL } = this.props;
+    return (
+      <li className={s.item} onClick={this.handleImageClick}>
+        <img className={s.itemImage}
+          src={webformatURL}
+          alt={id} />
+      </li>
+    )
+  }
 }
+
+export default ImageGalleryItem;

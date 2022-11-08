@@ -1,12 +1,15 @@
 import s from './Modal.module.css';
 
-export default function Modal({ onCloseButton }) {
+export default function Modal({ onCloseButton, largeImageUrl }) {
   return (
     <div className={s.Overlay}>
       <div className={s.Modal}>
-        <img src="" alt="" />
-        <button onClick={onCloseButton}>
-          Close modal
+        <img
+          src={largeImageUrl}
+          alt="image" />
+        <button
+          className={s.closeModalButton}
+          onClick={onCloseButton}>
         </button>
       </div>
     </div>
