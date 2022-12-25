@@ -1,13 +1,11 @@
 import s from './ImageGalleryItem.module.css';
 
 
-const ImageGalleryItem = ({ getLargeImageUrl, id, webformatURL, largeImageURL }) => {
-  const handleImageClick = () => {
-    getLargeImageUrl(largeImageURL);
-  }
-
+const ImageGalleryItem = ({ setLargeImageUrl, id, webformatURL, largeImageURL }) => {
   return (
-    <li className={s.item} onClick={handleImageClick}>
+    <li
+      className={s.item}
+      onClick={() => setLargeImageUrl(largeImageURL)}>
       <img className={s.itemImage}
         src={webformatURL}
         alt={id} />

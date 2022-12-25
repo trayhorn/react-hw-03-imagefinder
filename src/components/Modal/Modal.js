@@ -9,7 +9,7 @@ export default function Modal({ onCloseButton, largeImageUrl }) {
           alt="large version" />
         <button
           className={s.closeModalButton}
-          onClick={onCloseButton}>
+          onClick={() => onCloseButton(prevState => !prevState)}>
         </button>
       </div>
     </div>

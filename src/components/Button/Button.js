@@ -1,9 +1,9 @@
 import s from './Button.module.css';
 
-export default function Button({ clickCounter }) {
+export default function Button({ setPages }) {
   return (
     <button
-      onClick={clickCounter}
+      onClick={() => setPages(prevState => prevState + 1)}
       className={s.Button}
     >
       Load more
