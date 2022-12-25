@@ -1,8 +1,8 @@
+import { Component } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
 import './App.css';
-import { Component } from 'react';
 import Searchbar from './components/Searchbar';
 import ImageGallery from './components/ImageGallery';
 import Button from './components/Button';
@@ -58,7 +58,6 @@ class App extends Component {
         <ImageGallery
           getLargeImageUrl={this.getLargeImageUrl}
           onClick={this.openModalOnClick}
-          onCloseButton={this.toggleModal}
           images={images}
           pages={pages}
         />

@@ -6,7 +6,7 @@ export default function Modal({ onCloseButton, largeImageUrl }) {
       <div className={s.Modal}>
         <img
           src={largeImageUrl}
-          alt="image" />
+          alt="large version" />
         <button
           className={s.closeModalButton}
           onClick={onCloseButton}>
