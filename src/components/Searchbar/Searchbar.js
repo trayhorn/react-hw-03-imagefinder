@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import s from './Searchbar.module.css';
 
 
-const Searchbar = ({ setImagesOnSubmit }) => {
+const Searchbar = ({ setQueryOnSubmit, setPages }) => {
 
   const handleSubmit = ({ request }, { resetForm }) => {
     if (request.trim() === '') {
@@ -11,7 +11,8 @@ const Searchbar = ({ setImagesOnSubmit }) => {
       return
     }
 
-    setImagesOnSubmit(request);
+    setQueryOnSubmit(request);
+    setPages(1);
     resetForm();
   }
 
