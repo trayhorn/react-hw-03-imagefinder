@@ -37,7 +37,7 @@ export default function App() {
       />
       <ImageGallery
         setLargeImageUrl={setLargeImageUrl}
-        onClick={openModalOnClick}
+        onImageClick={openModalOnClick}
         query={query}
         pages={pages}
       />

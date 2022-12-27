@@ -3,23 +3,19 @@ import { useState, useEffect } from "react";
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
 import ImageGalleryItem from "./ImageGalleryItem/ImageGalleryItem";
 import s from './ImageGallery.module.css';
+import fetchImages from '../../services/API';
 
-const KEY = '29734383-6ec437d7a0c5df52cef54a0f9';
 
-
-const ImageGallery = ({ setLargeImageUrl, onClick, query, pages }) => {
+const ImageGallery = ({ setLargeImageUrl, onImageClick, query, pages }) => {
   const [collection, setCollection] = useState([]);
 
   useEffect(() => {
-    const URL = `https://pixabay.com/api/?q=${query}&page=${pages}&key=${KEY}&image_type=photo&orientation=horizontal&per_page=12`;
-
     if (!query) {
       return;
     }
 
     Loading.circle()
-    fetch(URL)
-      .then(r => r.json())
+    fetchImages(query, pages)
       .then(images => {
         if (pages === 1) {
           setCollection(images.hits)
@@ -33,7 +29,7 @@ const ImageGallery = ({ setLargeImageUrl, onClick, query, pages }) => {
   }, [pages, query])
 
   return (
-    <ul onClick={onClick} className={s.ImageGallery}>
+    <ul onClick={onImageClick} className={s.ImageGallery}>
       {collection.length > 0 &&
         collection.map(({ id, webformatURL, largeImageURL }) => {
           return (
